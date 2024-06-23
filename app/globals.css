@@ -2,26 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  height: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 204 100% 95%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 204 100% 98%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 204 100% 98%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 340 65% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 50 75% 60%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 90%;
+    --muted-foreground: 215.4 16.3% 47%;
+
+    --accent: 290 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 10 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 40% 80%;
+    --input: 210 40% 80%;
+    --ring: 340 65% 47%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 30% 15%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 30% 20%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 30% 20%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 340 65% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 50 75% 60%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 30% 25%;
+    --muted-foreground: 215 20.2% 64.9%;
+
+    --accent: 290 80% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 10 80% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 30% 25%;
+    --input: 240 30% 25%;
+    --ring: 340 65% 47%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
 }
