@@ -81,3 +81,5 @@ body,
     color: hsl(var(--foreground));
   }
 }
+
+@import "~@uploadthing/react/styles.css";
