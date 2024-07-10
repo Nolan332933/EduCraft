@@ -4,7 +4,7 @@ import * as z from "zod";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { File, ImageIcon, Loader2, Pencil, PlusCircle, X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Attachment, Course } from "@prisma/client";
 import Image from "next/image";
@@ -24,6 +24,7 @@ export const AttahmentForm = ({
   courseId,
 }: AttahmentFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const toggleEdit = () => setIsEditing((current) => !current);
   const router = useRouter();
 
@@ -35,6 +36,19 @@ export const AttahmentForm = ({
       router.refresh();
     } catch {
       toast.error("Someting went wrong");
+    }
+  };
+
+  const onDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+      await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
+      toast.success("Course attachment deleted");
+      router.refresh();
+    } catch {
+      toast.error("Someting went wrong");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -58,6 +72,32 @@ export const AttahmentForm = ({
             <p className="text-sm mt-2 text-slate-500 italic">
               No attachments yet
             </p>
+          )}
+          {initialData.attachments.length > 0 && (
+            <div className="space-y-2">
+              {initialData.attachments.map((attachment) => (
+                <div
+                  key={attachment.id}
+                  className="flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md"
+                >
+                  <File className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <p className="text-xs line-clamp-1">{attachment.name}</p>
+                  {deletingId === attachment.id && (
+                    <div>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    </div>
+                  )}
+                  {deletingId !== attachment.id && (
+                    <button
+                      onClick={() => onDelete(attachment.id)}
+                      className="ml-auto hover:opacity-75 transition"
+                    >
+                      <X className="h-4 w-4 " />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </>
       )}
