@@ -7,6 +7,7 @@ import { IconBadge } from "@/components/icon-badge";
 import { ChapterTitleForm } from "./_components/chapter-title-form";
 import { ChapterDescriptionForm } from "./_components/chapter-description-form";
 import { ChapterAccessForm } from "./_components/chapter-access-form";
+import { ChapterVideoForm } from "./_components/chapter-video-form";
 
 const ChapterIdPage = async ({
   params,
@@ -51,8 +52,8 @@ const ChapterIdPage = async ({
             href={`/teacher/courses/${params.courseId}`} //might needto justify later
             className="flex items-center text-sm hover:opacity-75 transition mb-6"
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            <span>Back to Course Setup</span>
+            <ArrowLeft className="h-5 w-5 mr-2" />
+            <span className="text-base">Back to Course Setup</span>
           </Link>
           <div className="flex items-center justify-between w-full">
             <div className="flex flex-col gap-y-2">
@@ -99,6 +100,11 @@ const ChapterIdPage = async ({
             <IconBadge icon={Video} />
             <h2 className="text-xl">Add a video</h2>
           </div>
+          <ChapterVideoForm
+            initialData={chapter}
+            courseId={params.courseId}
+            chapterId={params.chapterId}
+          />
         </div>
       </div>
     </div>

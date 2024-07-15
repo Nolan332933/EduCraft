@@ -12,6 +12,8 @@
     "@clerk/nextjs": "^5.2.1",
     "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3.6.0",
+    "@mux/mux-node": "^8.8.0",
+    "@mux/mux-player-react": "^2.8.0",
     "@neondatabase/serverless": "^0.9.4",
     "@prisma/client": "^5.16.1",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -20,7 +22,6 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/next": "^9.0.0",
-    "@types/node": "20.14.8",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@uploadthing/react": "^6.7.2",
@@ -52,6 +53,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "drizzle-kit": "^0.20.17",
     "prisma": "^5.16.1"
   }
