@@ -11,7 +11,7 @@ async function main() {
     { name: "Engineering" },
     { name: "Medical" },
     { name: "Art" },
-    { name: "Exam Prep" },
+    { name: "Exam Preps" },
   ];
 
   try {
