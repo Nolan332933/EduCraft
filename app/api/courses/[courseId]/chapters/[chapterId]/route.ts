@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 const mux = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
+  tokenId: process.env.MUX_TOKEN_ID!,
+  tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
 
 export async function DELETE(
@@ -47,7 +47,13 @@ export async function DELETE(
         },
       });
       if (existingMuxData) {
-        await mux.video.assets.delete(existingMuxData.assetId);
+        console.log("Deleting asset with ID:", existingMuxData.assetId);
+        try {
+          await mux.video.assets.delete(existingMuxData.assetId);
+          console.log("Deleted asset successfully.");
+        } catch (error) {
+          console.error("Failed to delete asset:", error);
+        }
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
@@ -62,14 +68,14 @@ export async function DELETE(
       },
     });
 
-    const publisheChaptersInCourse = await db.chapter.findMany({
+    const publishedChaptersInCourse = await db.chapter.findMany({
       where: {
         courseId: params.courseId,
         isPublished: true,
       },
     });
 
-    if (!publisheChaptersInCourse) {
+    if (publishedChaptersInCourse.length === 0) {
       await db.course.update({
         where: {
           id: params.courseId,
@@ -128,7 +134,13 @@ export async function PATCH(
       });
 
       if (existingMuxData) {
-        await mux.video.assets.delete(existingMuxData.assetId);
+        console.log("Deleting asset with ID:", existingMuxData.assetId);
+        try {
+          await mux.video.assets.delete(existingMuxData.assetId);
+          console.log("Deleted asset successfully.");
+        } catch (error) {
+          console.error("Failed to delete asset:", error);
+        }
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
